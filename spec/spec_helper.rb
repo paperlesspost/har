@@ -21,7 +21,7 @@ module HAR
     end
 
     def json(path)
-      JSON.parse(File.read(path))
+      MultiJson.decode(File.read(path))
     end
 
     def all_hars

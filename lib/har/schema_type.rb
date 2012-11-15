@@ -8,7 +8,7 @@ module HAR
       private
 
       def load_from(file)
-        schema = JSON.parse(File.read(file))
+        schema = MultiJson.decode(File.read(file))
 
         klass = Class.new(self) do
           schema['properties'].each do |name, definition|

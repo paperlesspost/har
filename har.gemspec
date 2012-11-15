@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "har"
 
-  s.add_dependency "json"
+  s.add_dependency "multi_json", "~>1.3"
   s.add_dependency "jschematic", ">= 0.1.0"
   s.add_dependency "launchy", ">= 0.3.7"
 

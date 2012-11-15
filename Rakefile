@@ -6,10 +6,10 @@ RSpec::Core::RakeTask.new
 
 desc 'Regenerate the schema files'
 task :schema do
-  require "json"
+  require "multi_json"
   
   out    = File.expand_path("../lib/har/schemas", __FILE__)
-  schema = JSON.parse(File.read("schema.json"))
+  schema = MultiJson.decode(File.read("schema.json"))
   
   # cleanup
   Dir[File.join(out, "*.json")].each { |f| 
@@ -22,7 +22,7 @@ task :schema do
     puts path
     
     File.open(path, "w") { |file|
-      file << JSON.pretty_generate(schema)
+      file << MultiJson.encode(schema, :pretty => true)
     }
   end
 end

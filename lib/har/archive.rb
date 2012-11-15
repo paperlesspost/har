@@ -3,7 +3,7 @@ module HAR
     include Serializable
 
     def self.from_string(str, uri = nil)
-      new JSON.parse(str), uri
+      new MultiJson.decode(str), uri
     end
 
     def self.from_file(path_or_io)
@@ -41,7 +41,7 @@ module HAR
 
     # @api private
     def self.add_schema(path)
-      data = JSON.parse(File.read(path))
+      data = MultiJson.decode(File.read(path))
       id = data.fetch('id')
 
       schemas[id] = data
@@ -94,7 +94,7 @@ module HAR
     end
 
     def save_to(path)
-      File.open(path, "w") { |io| io << @data.to_json }
+      File.open(path, "w") { |io| io << MultiJson.encode(@data) }
     end
 
     def valid?
